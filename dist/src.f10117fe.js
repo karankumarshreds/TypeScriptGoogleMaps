@@ -117,7 +117,46 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"node_modules/faker/lib/fake.js":[function(require,module,exports) {
+})({"src/CustomMap.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.CustomMap = void 0;
+;
+
+var CustomMap =
+/** @class */
+function () {
+  function CustomMap() {
+    this.googleMap = new google.maps.Map(document.querySelector('#map'), {
+      center: {
+        lat: 0,
+        lng: 0
+      },
+      zoom: 1
+    });
+  }
+
+  ;
+
+  CustomMap.prototype.addMarker = function (mappable) {
+    new google.maps.Marker({
+      map: this.googleMap,
+      position: {
+        lat: mappable.location.lat,
+        lng: mappable.location.lng
+      }
+    });
+  };
+
+  return CustomMap;
+}();
+
+exports.CustomMap = CustomMap;
+;
+},{}],"node_modules/faker/lib/fake.js":[function(require,module,exports) {
 /*
   fake.js - generator method for combining faker methods based on string input
 
@@ -85172,15 +85211,22 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var CustomMap_1 = require("./CustomMap");
+
 var User_1 = __importDefault(require("./User"));
 
-var Company_1 = __importDefault(require("./Company"));
+var Company_1 = __importDefault(require("./Company")); // const user = new User();
+// console.log(user);
+// const company = new Company();
+// console.log(company);
+
 
 var user = new User_1.default();
-console.log(user);
 var company = new Company_1.default();
-console.log(company);
-},{"./User":"src/User.ts","./Company":"src/Company.ts"}],"C:/Users/elitebook/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var customMap = new CustomMap_1.CustomMap();
+customMap.addMarker(user);
+customMap.addMarker(company);
+},{"./CustomMap":"src/CustomMap.ts","./User":"src/User.ts","./Company":"src/Company.ts"}],"C:/Users/elitebook/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -85208,7 +85254,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49215" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56867" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
